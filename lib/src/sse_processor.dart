@@ -481,7 +481,7 @@ final class SSEProcessor extends Interceptor implements Destroyable {
     _exceptionTimeout = config.exceptionTimeout;
     _dio = dio;
     _dio.interceptors.add(this);
-    slog.init(fileName: config.logFileName, debugAble: config.debug);
+    slog.init(fileName: config.logFileName, debugAble: config.debug, onLog: config.onLog);
     _sio = Sio(_dio, _interceptorManager, this, _filterService);
     _sseBridge.debugTag = config.debugTag;
     _sseCacheDeliverer = SSECacheDeliverer(

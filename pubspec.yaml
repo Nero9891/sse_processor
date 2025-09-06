@@ -1,11 +1,15 @@
 name: sse_processor
 description: A pure Dart package for Server-Sent Events (SSE) delivery management
 
-version: 1.0.0+3
+version: 1.0.0+4
 
 environment:
   sdk: ">=3.4.0 <4.0.0"
   flutter: ">=3.0.0"
+
+homepage: https://github.com/Nero9891/sse_processor
+repository: https://github.com/Nero9891/sse_processor
+issue_tracker: https://github.com/Nero9891/sse_processor/issues
 
 dependencies:
   flutter:

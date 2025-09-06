@@ -1,3 +1,4 @@
+import 'package:sse_processor/src/sse_types.dart';
 import 'package:sse_processor/sse.dart';
 
 final class SSEProcessorConfig {
@@ -12,6 +13,7 @@ final class SSEProcessorConfig {
   SSEFilter? sseFilter; //流转换成SSE首先会经过它
   StreamAdapter? streamAdapter; //外部定义Stream转换SSE过程
   Set<String>? unCheckConnectStatePaths; //指定不做连接状态检查的流式请求地址（有的流式请求不含展示数据，需要排出状态检查）
+  final LogCallback? onLog;
 
   SSEProcessorConfig(
       {required this.version,
@@ -22,6 +24,7 @@ final class SSEProcessorConfig {
       required this.sseBufferExtractInterval,
       this.sseFilter,
       this.debugTag,
+      this.onLog,
       this.eleTypesInInterval,
       this.unCheckConnectStatePaths,
       this.streamAdapter});

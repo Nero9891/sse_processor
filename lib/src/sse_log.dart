@@ -1,10 +1,30 @@
+import 'package:sse_processor/src/sse_types.dart';
+
 final slog = SLog();
 
 final class SLog {
-  void init({required String fileName, required bool debugAble}) {}
+  LogCallback? _logCallback;
 
-  void df(Object? message, {String? tag, Object? error, StackTrace? stackTrace}) {}
+  void init({required String fileName, required bool debugAble, required LogCallback? onLog}) {
+    _logCallback = onLog;
+  }
 
-  /// If debug mode will print log content to file, Non-debug mode only print to the console.
-  void d(Object? message, {String? tag, Object? error, StackTrace? stackTrace}) {}
+  void _log(Object? message,
+      {String? tag, Object? error, StackTrace? stackTrace, bool? forcePrintFile}) {
+    if (_logCallback != null) {
+      _logCallback!(message,
+          tag: tag, error: error, stackTrace: stackTrace, forcePrintFile: forcePrintFile);
+    } else {
+      print(
+          '[SLog - No Logger]: ${tag != null ? "[$tag] " : ""}$message${error != null ? "\nError: $error" : ""}${stackTrace != null ? "\nStackTrace: $stackTrace" : ""}');
+    }
+  }
+
+  void df(Object? message, {String? tag, Object? error, StackTrace? stackTrace}) {
+    _log(message, tag: tag, error: error, stackTrace: stackTrace, forcePrintFile: true);
+  }
+
+  void d(Object? message, {String? tag, Object? error, StackTrace? stackTrace}) {
+    _log(message, tag: tag, error: error, stackTrace: stackTrace, forcePrintFile: false);
+  }
 }
